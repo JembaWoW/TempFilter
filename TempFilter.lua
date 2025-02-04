@@ -5,9 +5,23 @@ TempFilter_OldMessage = ""
 
 function ChatFrame_OnEvent(event)
 
-	for id, scan in pairs(TempFilter_Block) do
-		if strfind(string.lower(arg1), string.lower(scan)) then
-		return false
+	if (event == "CHAT_MSG_CHANNEL" or
+			event == "CHAT_MSG_YELL" or
+			event == "CHAT_MSG_SAY" or
+			event == "CHAT_MSG_GUILD" or
+			event == "CHAT_MSG_OFFICER" or
+			event == "CHAT_MSG_EMOTE" or
+			event == "CHAT_MSG_PARTY" or
+			event == "CHAT_MSG_RAID" or
+			event == "CHAT_MSG_RAID_LEADER" or
+			event == "CHAT_MSG_RAID_WARNING" or
+			event == "CHAT_MSG_SYSTEM" or
+			event == "CHAT_MSG_WHISPER") and arg2 and arg1 then
+
+		for id, scan in pairs(TempFilter_Block) do
+			if strfind(arg1, scan) then
+			return false
+			end
 		end
 	end
 	TempFilter_ChatFrame_OnEvent(event);
